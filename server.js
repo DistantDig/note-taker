@@ -5,14 +5,14 @@ const path = require('path');
 const PORT = 3000;
 const app = express();
 
-app.use(express.static('public'));
-
+// Redirect to index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
+// Redirect to notes.html
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, 'notes.html'));
+    res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
 app.listen(PORT, () => {

@@ -3,11 +3,10 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
+const { v4: uuidv4 } = require('uuid');
 
 const PORT = 3000;
 const app = express();
-
-let jsonArray;
 
 
 // Middleware
@@ -75,7 +74,7 @@ app.post('/api/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            note_id: 0
+            id: uuidv4()
         };
 
         readAndAppend(newNote, './db/db.json');
@@ -97,15 +96,8 @@ app.delete('/api/notes/:id', (req, res) => {
 
     const id = req.params.id;
 
-    console.log(`1`);
-
     if (id) {
-        
-        console.log(`2`);
-
         readAndDelete(id, './db/db.json');
-
-        console.log(`3`);
 
         const response = {
             status: 'success',

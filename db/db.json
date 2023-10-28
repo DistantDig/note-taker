@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "title": "Testing Note",
+        "text": "This note is for testing purposes.",
+        "id": "5e538967-5b0b-4f56-824e-1cfa2053ef2a"
+    },
+    {
+        "title": "Second Testing Note",
+        "text": "This note is not for testing purposes (obviously).",
+        "id": "acf62a56-e953-4f98-8cf3-82903910ad5c"
+    }
+]

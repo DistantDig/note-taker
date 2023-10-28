@@ -46,6 +46,19 @@ const readAndAppend = (content, file) => {
     });
   };
 
+  const readAndDelete = (id, file) => {
+    fs.readFile(file, 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        const parsedData = JSON.parse(data);
+        const index = parsedData.indexOf(id);
+        parsedData.splice(index, 1);
+        writeToFile(file, parsedData);
+      }
+    });
+  };
+
 
 // Requests
 app.get('/api/notes', (req, res) => {
@@ -70,6 +83,33 @@ app.post('/api/notes', (req, res) => {
         const response = {
             status: 'success',
             body: newNote
+        };
+
+        console.log(response);
+        res.status(201).json(response);
+    } else {
+        res.status(500).json('Error in saving note');
+    }
+});
+
+app.delete('/api/notes/:id', (req, res) => {
+    console.log(`${req.method} request received to remove a note`);
+
+    const id = req.params.id;
+
+    console.log(`1`);
+
+    if (id) {
+        
+        console.log(`2`);
+
+        readAndDelete(id, './db/db.json');
+
+        console.log(`3`);
+
+        const response = {
+            status: 'success',
+            body: id
         };
 
         console.log(response);
